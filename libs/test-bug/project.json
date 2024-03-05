@@ -1,0 +1,40 @@
+{
+  "name": "test-bug",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/test-bug/src",
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build-mjs", "build-cjs"],
+      "options": {
+        "commands": [
+          "echo 1"
+        ],
+        "cwd": "./",
+        "parallel": false
+      }
+    },
+    "build-cjs": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/test-bug/cjs",
+        "main": "libs/test-bug/src/index.ts",
+        "tsConfig": "libs/test-bug/tsconfig.lib.json",
+        "assets": ["libs/test-bug/*.md"]
+      }
+    },
+    "build-mjs": {
+      "executor": "@nx/js:tsc",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/test-bug/mjs",
+        "main": "libs/test-bug/src/index.ts",
+        "tsConfig": "libs/test-bug/tsconfig-mjs.lib.json",
+        "assets": ["libs/test-bug/*.md"]
+      }
+    }
+  },
+  "tags": []
+}

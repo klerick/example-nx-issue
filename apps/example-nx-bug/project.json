@@ -1,0 +1,68 @@
+{
+  "name": "example-nx-bug",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "prefix": "example-nx-bug",
+  "sourceRoot": "apps/example-nx-bug/src",
+  "tags": [],
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:application",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/example-nx-bug",
+        "index": "apps/example-nx-bug/src/index.html",
+        "browser": "apps/example-nx-bug/src/main.ts",
+        "polyfills": ["zone.js"],
+        "tsConfig": "apps/example-nx-bug/tsconfig.app.json",
+        "assets": [
+          "apps/example-nx-bug/src/favicon.ico",
+          "apps/example-nx-bug/src/assets"
+        ],
+        "styles": ["apps/example-nx-bug/src/styles.css"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "optimization": false,
+          "extractLicenses": false,
+          "sourceMap": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "buildTarget": "example-nx-bug:build:production"
+        },
+        "development": {
+          "buildTarget": "example-nx-bug:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "buildTarget": "example-nx-bug:build"
+      }
+    }
+  }
+}
